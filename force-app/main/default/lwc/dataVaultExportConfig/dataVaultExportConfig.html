@@ -1,0 +1,138 @@
+<template>
+  <lightning-card
+    title="DataVault Export Configuration"
+    icon-name="standard:settings"
+  >
+    <!-- Global spinner while loading configuration or saving -->
+    <template lwc:if={isLoading}>
+      <div class="slds-p-around_large slds-align_absolute-center">
+        <lightning-spinner
+          alternative-text="Loading configuration"
+        ></lightning-spinner>
+      </div>
+    </template>
+
+    <template lwc:else>
+      <div class="slds-p-around_medium">
+        <!-- Step 1: Cloud Platform selection (required first) -->
+        <lightning-combobox
+          label="Cloud Platform"
+          value={cloudPlatform}
+          options={cloudPlatformPicklistOptions}
+          onchange={handleCloudPlatformChange}
+          disabled={inputsDisabled}
+          placeholder="Select a cloud platform for backup"
+          class="slds-m-bottom_medium"
+        ></lightning-combobox>
+
+        <!-- Step 2: Platform-specific config (shown after platform selected) -->
+        <template lwc:if={showPlatformConfigFields}>
+          <!-- Named Credential input -->
+          <lightning-input
+            label="Named Credential Name"
+            value={namedCredentialName}
+            onchange={handleNamedCredentialChange}
+            placeholder="e.g. DataVault_NamedCredential"
+            disabled={inputsDisabled}
+            class="slds-m-bottom_small"
+          ></lightning-input>
+
+          <!-- Object selection: disabled combobox with label when locked; spinner while loading; full combobox when editing -->
+          <template lwc:if={showObjectSpinner}>
+            <div class="slds-form-element slds-m-bottom_medium">
+              <label class="slds-form-element__label">Object</label>
+              <div
+                class="slds-form-element__control slds-is-relative slds-p-vertical_medium"
+              >
+                <lightning-spinner
+                  size="small"
+                  alternative-text="Loading objects"
+                ></lightning-spinner>
+              </div>
+            </div>
+          </template>
+          <template lwc:else>
+            <lightning-combobox
+              label="Object"
+              value={objectApiName}
+              options={objectPicklistOptions}
+              onchange={handleObjectChange}
+              disabled={inputsDisabled}
+              class="slds-m-bottom_medium"
+            ></lightning-combobox>
+          </template>
+        </template>
+
+        <!-- Actions shown when config is locked -->
+        <template lwc:if={showEditAndToggleButtons}>
+          <lightning-button
+            label="Edit"
+            variant="brand"
+            onclick={handleEdit}
+            class="slds-m-right_small"
+          ></lightning-button>
+
+          <lightning-button
+            label={disableOrEnableExportButtonLabel}
+            variant={disableOrEnableExportButtonVariant}
+            onclick={handleDisableOrEnableExport}
+          ></lightning-button>
+        </template>
+
+        <!-- Last run status (read-only, shown when config exists and run has occurred) -->
+        <template lwc:if={showLastRunStatus}>
+          <div class="slds-box slds-m-top_medium slds-theme_shade">
+            <h3 class="slds-text-heading_small slds-m-bottom_small">
+              Last run
+            </h3>
+            <div class="slds-grid slds-wrap slds-gutters_small">
+              <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                <dl class="slds-dl_horizontal">
+                  <dt class="slds-dl_horizontal__label">Status</dt>
+                  <dd class="slds-dl_horizontal__detail">
+                    <lightning-badge
+                      label={lastRunStatus}
+                      variant={lastRunStatusVariant}
+                    ></lightning-badge>
+                  </dd>
+                  <dt class="slds-dl_horizontal__label">Success count</dt>
+                  <dd class="slds-dl_horizontal__detail">
+                    {lastRunSuccessCountDisplay}
+                  </dd>
+                  <dt class="slds-dl_horizontal__label">Error count</dt>
+                  <dd class="slds-dl_horizontal__detail">
+                    {lastRunErrorCountDisplay}
+                  </dd>
+                  <dt class="slds-dl_horizontal__label">Completed</dt>
+                  <dd class="slds-dl_horizontal__detail">
+                    <template lwc:if={lastRunCompleted}>
+                      <lightning-formatted-date-time
+                        value={lastRunCompleted}
+                        year="numeric"
+                        month="short"
+                        day="numeric"
+                        hour="2-digit"
+                        minute="2-digit"
+                      ></lightning-formatted-date-time>
+                    </template>
+                    <template lwc:else>—</template>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <!-- Save button shown only when editing -->
+        <template lwc:if={showSaveButton}>
+          <lightning-button
+            label="Save & Schedule Export"
+            variant="brand"
+            onclick={handleSave}
+            disabled={disableSaveButton}
+          ></lightning-button>
+        </template>
+      </div>
+    </template>
+  </lightning-card>
+</template>

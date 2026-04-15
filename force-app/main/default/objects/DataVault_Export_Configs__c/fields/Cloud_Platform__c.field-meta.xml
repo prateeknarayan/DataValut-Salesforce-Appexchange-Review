@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cloud_Platform__c</fullName>
+    <description
+  >Cloud platform for backup (from DataVault_Cloud_Platform__mdt). e.g. AWS_S3.</description>
+    <externalId>false</externalId>
+    <label>Cloud Platform</label>
+    <length>80</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

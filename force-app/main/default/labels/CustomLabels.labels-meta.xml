@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>DataVaultPermissionSetName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Permission Set name for DataVault tests</shortDescription>
+        <value>DataVault_Permission_Set</value>
+    </labels>
+    <labels>
+        <fullName>DataVaultTestUserProfileName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Profile name for test user creation</shortDescription>
+        <value>System Administrator</value>
+    </labels>
+</CustomLabels>

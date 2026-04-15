@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description
+  >Available cloud platforms where org records can be backed up. Add or deactivate platforms to control what appears in the Export Config UI.</description>
+    <label>DataVault Cloud Platform</label>
+    <pluralLabel>DataVault Cloud Platforms</pluralLabel>
+    <visibility>Protected</visibility>
+</CustomObject>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Error_Type__c</fullName>
+    <description
+  >Category: Callout Failure or General Apex Exception.</description>
+    <label>Error Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Callout Failure</fullName>
+                <default>false</default>
+                <label>Callout Failure</label>
+            </value>
+            <value>
+                <fullName>General Apex Exception</fullName>
+                <default>true</default>
+                <label>General Apex Exception</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
